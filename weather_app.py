@@ -5,7 +5,7 @@ from twilio.twiml.messaging_response import MessagingResponse
 app = Flask(__name__)
 @app.route('/', methods = ['POST'])
 def sms_reply():
-    #Deals with proper formatting of states and cities in accordance to the WUnderground API
+    # Deals with proper formatting of states and cities in accordance to the Wunderground API
         city_state = request.values.get('Body', None)
         a = city_state.split(',')
         b = a[0].split(" ")
@@ -27,7 +27,7 @@ def get_coords(city, state):
     lon = location_resp['location']['lon']
     lat = location_resp['location']['lat']
 
-    # Finds specific time for each specific location based on the latitude and longitude information using geonames API
+    # Finds specific time for each specific location based on the latitude and longitude information using Geonames API
     timer = requests.get('http://api.geonames.org/timezoneJSON?lat=%s&lng=%s&username=naimk101'%(lat,lon))
 
     location_time = timer.json()
@@ -82,6 +82,4 @@ def get_forecast(city, state, current_time, hour):
 
 if __name__ == '__main__':
     app.run()
-
-
 
